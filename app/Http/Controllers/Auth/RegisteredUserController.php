@@ -34,18 +34,21 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'rol' => ['required','numeric', 'between:1,2']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'rol' => $request -> rol
         ]);
 
         event(new Registered($user));
 
+        //autentica
         Auth::login($user);
-
+        //redirecciona
         return redirect(RouteServiceProvider::HOME);
     }
 }
