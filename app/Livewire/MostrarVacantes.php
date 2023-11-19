@@ -8,6 +8,12 @@ use Livewire\Component;
 
 class MostrarVacantes extends Component
 {
+    protected $listeners = ['eliminarVacante'];
+
+    public function eliminarVacante(Vacante $vacante)
+    {
+        $vacante->delete();
+    }
 
     public function render()
     {

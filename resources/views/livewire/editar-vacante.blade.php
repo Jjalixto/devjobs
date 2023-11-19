@@ -1,4 +1,4 @@
-<form class="md:w-1/2 space-y-5" wire:submit.prevent='crearVacante'>
+<form class="md:w-1/2 space-y-5" wire:submit.prevent='editarVacante'>
 
     <div>
         <x-input-label for="titulo" :value="__('Título Vacante')" />
@@ -79,8 +79,7 @@
         class="block mt-1 w-full"
         type="date"
         wire:model="ultimo_dia"
-        :value="old('ultimo_dia')"
-        placeholder="Empresa: ej.Netflix, Uber, Shopify" />
+        :value="old('ultimo_dia')" />
 
         @error('ultimo_dia')
             {{-- sus componentes de livewire son dinamicos --}}
@@ -107,26 +106,27 @@
         id="imagen"
         class="block mt-1 w-full"
         type="file"
-        wire:model="imagen"
+        wire:model="imagen_nueva"
         accept="image/*" />
 
         <div class="my-5 w-96">
             <x-input-label  :value="__('Imagen Actual')" />
             <img src="{{asset('storage/vacantes/' . $imagen)}}" alt="{{'Imagen Vacante ' . $titulo}}" >
         </div>
-        {{-- <div class="my-5 w-96">
-            @if ($imagen)
-                Imagen:
-                <img src="{{ $imagen->temporaryUrl() }}" >
-            @endif
-        </div> --}}
 
-        @error('imagen')
+        <div class="my-5 w-96">
+            @if ($imagen_nueva)
+                Imagen Nueva:
+                <img src="{{ $imagen_nueva->temporaryUrl() }}" >
+            @endif
+        </div>
+
+        @error('imagen_nueva')
         {{-- sus componentes de livewire son dinamicos --}}
             <livewire:mostrar-alerta :message="$message"/>
     @enderror
     </div>
     <x-primary-button>
-        Crear Cuenta
+        Guardar Cambios
     </x-primary-button>
 </form>

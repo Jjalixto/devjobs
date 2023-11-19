@@ -125,6 +125,6 @@
     @enderror
     </div>
     <x-primary-button>
-        Crear Cuenta
+        Crear Vacante
     </x-primary-button>
 </form>
